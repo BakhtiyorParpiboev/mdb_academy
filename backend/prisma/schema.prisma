@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id               String             @id @default(uuid())
+  firebaseUid      String             @unique
+  email            String             @unique
+  username         String             @unique // Nickname
+  firstName        String?
+  lastName         String?
+  phoneNumber      String?
+  bio              String?
+  profilePic       String?
+  githubLink       String?
+  xp               Int                @default(0)
+  level            Int                @default(1)
+  createdAt        DateTime           @default(now())
+  
+  savedRoadmaps    String[]           @default([])
+  
+  streak           Streak?
+  xpLogs           XpLog[]
+  achievements     Achievement[]
+  certificates     Certificate[]
+  portfolioProject PortfolioProject[]
+  courseProgress   CourseProgress[]
+  chats            Chat[]
+}
+
+model Streak {
+  id               String   @id @default(uuid())
+  currentStreak    Int      @default(0)
+  longestStreak    Int      @default(0)
+  lastActiveDate   DateTime @default(now())
+  streakFreezes    Int      @default(2)
+  freezeUsedToday  Boolean  @default(false)
+
+  userId           String   @unique
+  user             User     @relation(fields: [userId], references: [id])
+}
+
+model XpLog {
+  id        String   @id @default(uuid())
+  amount    Int
+  source    String   // 'lesson', 'game', 'compiler'
+  createdAt DateTime @default(now())
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Achievement {
+  id        String   @id @default(uuid())
+  badgeType String
+  earnedAt  DateTime @default(now())
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Certificate {
+  id             String   @id @default(uuid())
+  courseId       String
+  certificateUrl String
+  issuedAt       DateTime @default(now())
+
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+}
+
+model PortfolioProject {
+  id          String   @id @default(uuid())
+  title       String
+  codeSnippet String
+  language    String
+  createdAt   DateTime @default(now())
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model CourseProgress {
+  id          String   @id @default(uuid())
+  courseId    String
+  status      String   // 'in-progress', 'completed'
+  completedAt DateTime?
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+model Chat {
+  id        String    @id @default(uuid())
+  title     String    @default("Yangi Chat")
+  model     String    @default("gpt-4") // gpt-4, claude-3, gemini-pro
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  messages  Message[]
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  role      String   // 'user' | 'assistant'
+  content   String   @db.Text
+  fileUrl   String?  
+  createdAt DateTime @default(now())
+
+  chatId    String
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+}

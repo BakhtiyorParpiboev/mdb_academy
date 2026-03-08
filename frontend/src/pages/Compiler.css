@@ -1,0 +1,258 @@
+/* Compiler Page specific layout matching the reference UI */
+.compiler-page {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 72px);
+    /* Full height minus main header */
+    background-color: var(--bg-color);
+    overflow: hidden;
+}
+
+.compiler-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    height: 48px;
+}
+
+.toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.file-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent-blue-600);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-bottom: 2px solid var(--accent-blue-500);
+    cursor: pointer;
+}
+
+.dark-theme .file-tab {
+    color: var(--accent-blue-400);
+}
+
+.toolbar-center {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.all-btn-hover {
+    transition: all 0.2s;
+}
+
+.all-btn-hover:hover {
+    transform: translateY(-1px);
+}
+
+.upload-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-color);
+    cursor: pointer;
+}
+
+.upload-btn:hover {
+    background-color: var(--btn-surface-color);
+}
+.upload-btn:active,
+.upload-btn:focus {
+    background-color: var(--surface-color);
+}
+
+.lang-select {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+    background-color: var(--accent-blue-500);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.lang-select:hover:not(:disabled) {
+    background-color: var(--accent-blue-600);
+}
+
+.lang-select:focus,
+.lang-select:active {
+    background-color: var(--accent-blue-600);
+    color: white;
+    border-color: var(--border-color);
+}
+
+.lang-select option {
+    background-color: white;
+    color: #333;
+}
+
+.file-tab-add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    font-weight: 300;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.file-tab-add:hover {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.run-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: white;
+    background-color: #ec4899;
+    /* Pink/Red color from reference */
+    border-radius: var(--radius-sm);
+}
+
+.run-btn:hover:not(:disabled) {
+    background-color: #db2777;
+}
+
+.compiler-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.editor-pane {
+    flex: 1;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hide line below active line if distracting, but monaco handles aesthetics */
+
+.resize-handle {
+    width: 6px;
+    background-color: var(--border-color);
+    cursor: col-resize;
+    transition: background-color 0.2s;
+    z-index: 10;
+}
+
+.resize-handle:hover,
+.resize-handle:active {
+    background-color: var(--accent-blue-500);
+}
+
+.output-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color);
+}
+
+.pane-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pane-header {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pane-content {
+    flex: 1;
+    padding: 16px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.875rem;
+    overflow-y: auto;
+    color: var(--text-primary);
+}
+
+.stdin-textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+    background: transparent;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.output-error {
+    color: #ef4444;
+}
+
+.output-success {
+    color: #22c55e;
+}
+
+@media (max-width: 768px) {
+    .compiler-toolbar {
+        flex-direction: column;
+        height: auto;
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .toolbar-right {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .compiler-body {
+        flex-direction: column !important;
+    }
+
+    .editor-pane,
+    .output-pane {
+        width: 100% !important;
+        height: 50% !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .resize-handle {
+        width: 100%;
+        height: 6px;
+        cursor: row-resize;
+    }
+}

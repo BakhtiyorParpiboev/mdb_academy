@@ -1,0 +1,132 @@
+/* Footer container with animated gradient */
+.footer {
+  background: linear-gradient(270deg,
+      var(--accent-blue-50),
+      #e0e7ff,
+      var(--surface-color));
+  background-size: 600% 600%;
+  animation: gradientAnimation 12s ease infinite;
+  border-top: 1px solid var(--border-color);
+  padding-top: 64px;
+  margin-top: auto;
+}
+
+.dark-theme .footer {
+  background: linear-gradient(270deg,
+      var(--surface-color),
+      var(--accent-blue-100),
+      #0f172a);
+  background-size: 600% 600%;
+  animation: gradientAnimation 12s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-logo {
+  margin-bottom: 16px;
+}
+
+.footer-description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: 16px;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+
+.social-links a:hover {
+  background-color: var(--accent-blue-50);
+  color: var(--accent-blue-600);
+  border-color: var(--accent-blue-300);
+  transform: translateY(-2px);
+}
+
+.dark-theme .social-links a:hover {
+  background-color: var(--accent-blue-100);
+}
+
+/* Headings */
+.footer-heading {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+/* Link Lists */
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
+  color: var(--accent-blue-500);
+}
+
+/* Bottom Bar */
+.footer-bottom {
+  padding: 24px 0;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+/* Responsive constraints */
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
